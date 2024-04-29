@@ -80,13 +80,13 @@
             // Player
             // 
             this.Player.BackColor = System.Drawing.Color.Transparent;
-            this.Player.Image = global::MyProject.Properties.Resources.up;
-            this.Player.Location = new System.Drawing.Point(410, 491);
+            this.Player.Location = new System.Drawing.Point(433, 459);
             this.Player.Name = "Player";
             this.Player.Size = new System.Drawing.Size(71, 100);
             this.Player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.Player.TabIndex = 4;
             this.Player.TabStop = false;
+            this.Player.Click += new System.EventHandler(this.Player_Click);
             // 
             // gameTimer
             // 
@@ -108,6 +108,7 @@
             this.ForeColor = System.Drawing.SystemColors.Control;
             this.Name = "Form1";
             this.Text = "Game";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyIsUp);
             ((System.ComponentModel.ISupportInitialize)(this.Player)).EndInit();

@@ -20,9 +20,16 @@ namespace MyProject
 
         int PlayerHealth = 100;
         const int minDistX = 150, minDistY = 150;
+        const int minPlayerSpeed = 5, maxPlayerSpeed = 10;
+        const int maxHp = 100;
+
+        const int startZombies = 3;
+        const int killsPerZombie = 15;
+
         int bullets = 10;
         int speed = 10;
         int zmspeed = 3;
+
         int score = 0;
 
         List<PictureBox> zombies = new List<PictureBox>();
@@ -58,6 +65,7 @@ namespace MyProject
                 gameTimer.Stop();
 
             }
+            speed = getPlayerSpeed();
             txtBullet.Text = "Bullets: " + bullets;
             txtKill.Text = "Kills: " + score;
             if (goleft == true && Player.Left > 0)
@@ -86,7 +94,7 @@ namespace MyProject
                     {
                         this.Controls.Remove(x);
                         ((PictureBox)x).Dispose();
-                        bullets += 5;
+                        bullets += random.Next(3, 8);
                     }
                 }
 
@@ -129,7 +137,7 @@ namespace MyProject
                             ((PictureBox)x).Dispose();
                             ((PictureBox)i).Dispose();
                             zombies.Remove((PictureBox)x);
-                            makezombie();
+                            makeZombies();
                         }
                     }
                 }
@@ -213,6 +221,26 @@ namespace MyProject
 
         }
 
+        private int getPlayerSpeed()
+        {
+            return minPlayerSpeed + PlayerHealth * (maxPlayerSpeed - minPlayerSpeed) / maxHp;
+        }
+
+        private void Player_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private int getCountZombies()
+        {
+            return startZombies + (score / killsPerZombie);
+        }
+
         private void shoot(string direction)
         {
             Bullet shootBullet = new Bullet();
@@ -220,6 +248,12 @@ namespace MyProject
             shootBullet.bulletx = Player.Left + (Player.Width / 2);
             shootBullet.bullety = Player.Top + (Player.Height / 2);
             shootBullet.makebullet(this);
+        }
+
+        private void makeZombies() {
+            while ((int)zombies.Count < getCountZombies()) {
+                makezombie();
+            }
         }
 
         private void makezombie()
@@ -304,10 +338,7 @@ namespace MyProject
             }
 
             zombies.Clear();
-            for (int i = 0; i < 3; i++)
-            {
-                makezombie();
-            }
+            makeZombies();
 
             // rofls
             goup = false;

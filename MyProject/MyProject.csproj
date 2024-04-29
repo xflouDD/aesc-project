@@ -112,7 +112,18 @@
     <None Include="Resources\zup.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\background.jpg" />
+    <None Include="Resources\zup1.png" />
+    <None Include="Resources\zright1.png" />
+    <None Include="Resources\zleft1.png" />
+    <None Include="Resources\zdown1.png" />
+    <None Include="Resources\up2.png" />
+    <None Include="Resources\right1.png" />
+    <None Include="Resources\left1.png" />
+    <None Include="Resources\down1.png" />
+    <None Include="Resources\dead1.png" />
+    <None Include="Resources\ammo-Image1.png" />
+    <Content Include="Resources\background.jpg" />
+    <None Include="Resources\up1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\lil.png" />
