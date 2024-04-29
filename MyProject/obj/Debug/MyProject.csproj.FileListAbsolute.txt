@@ -1,0 +1,11 @@
+C:\Users\Asus\Desktop\MyProject\MyProject\bin\Debug\MyProject.exe.config
+C:\Users\Asus\Desktop\MyProject\MyProject\bin\Debug\MyProject.exe
+C:\Users\Asus\Desktop\MyProject\MyProject\bin\Debug\MyProject.pdb
+C:\Users\Asus\Desktop\MyProject\MyProject\obj\Debug\MyProject.csproj.AssemblyReference.cache
+C:\Users\Asus\Desktop\MyProject\MyProject\obj\Debug\MyProject.csproj.SuggestedBindingRedirects.cache
+C:\Users\Asus\Desktop\MyProject\MyProject\obj\Debug\MyProject.Form1.resources
+C:\Users\Asus\Desktop\MyProject\MyProject\obj\Debug\MyProject.Properties.Resources.resources
+C:\Users\Asus\Desktop\MyProject\MyProject\obj\Debug\MyProject.csproj.GenerateResource.cache
+C:\Users\Asus\Desktop\MyProject\MyProject\obj\Debug\MyProject.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Desktop\MyProject\MyProject\obj\Debug\MyProject.exe
+C:\Users\Asus\Desktop\MyProject\MyProject\obj\Debug\MyProject.pdb
