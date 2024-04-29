@@ -19,6 +19,7 @@ namespace MyProject
         string direct = "up";
 
         int PlayerHealth = 100;
+        const int minDistX = 150, minDistY = 150;
         int bullets = 10;
         int speed = 10;
         int zmspeed = 3;
@@ -226,8 +227,30 @@ namespace MyProject
             PictureBox zombie = new PictureBox();
             zombie.Tag = "zombie";
             zombie.Image = Properties.Resources.zdown;
-            zombie.Left = random.Next(0, 900);
-            zombie.Top = random.Next(0, 800);
+          
+
+            while (true) {
+                bool good = true;
+                
+                int tempX = random.Next(0, 900);
+                int tempY = random.Next(0, 800);
+
+                
+                if (Math.Abs(tempX - Player.Left) < minDistX) {
+                    good = false;
+                }
+
+                if (Math.Abs(tempY - Player.Top) < minDistY) {
+                    good = false;
+                }
+
+                if (good) {
+                    zombie.Left = tempX;
+                    zombie.Top = tempY;
+                    break;
+                }
+            }
+
             zombie.SizeMode = PictureBoxSizeMode.AutoSize;
             zombie.BackColor = Color.Transparent;
             zombie.BackgroundImage = null;
@@ -241,8 +264,29 @@ namespace MyProject
         {
             PictureBox newbull = new PictureBox();
             newbull.Image = Properties.Resources.ammo_Image;
-            newbull.Left = random.Next(10, this.ClientSize.Width - newbull.Width);
-            newbull.Top = random.Next(50, this.ClientSize.Height - newbull.Height);
+
+            while (true) {
+                bool good = true;
+
+                int tempX = random.Next(10, this.ClientSize.Width - newbull.Width);
+                int tempY = random.Next(50, this.ClientSize.Height - newbull.Height);
+
+
+                if (Math.Abs(tempX - Player.Left) < minDistX) {
+                    good = false;
+                }
+
+                if (Math.Abs(tempY - Player.Top) < minDistY) {
+                    good = false;
+                }
+
+                if (good) {
+                    newbull.Left = tempX;
+                    newbull.Top = tempY;
+                    break;
+                }
+            }
+
             newbull.Tag = "newbull";
             this.Controls.Add(newbull);
             newbull.BringToFront();
@@ -264,6 +308,8 @@ namespace MyProject
             {
                 makezombie();
             }
+
+            // rofls
             goup = false;
             goleft = false;
             godown = false;
