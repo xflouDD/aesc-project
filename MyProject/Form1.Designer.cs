@@ -33,8 +33,8 @@
             this.txtKill = new System.Windows.Forms.Label();
             this.txtHealth = new System.Windows.Forms.Label();
             this.HealthBar = new System.Windows.Forms.ProgressBar();
-            this.Player = new System.Windows.Forms.PictureBox();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
+            this.Player = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Player)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,9 +77,16 @@
             this.HealthBar.TabIndex = 3;
             this.HealthBar.Value = 100;
             // 
+            // gameTimer
+            // 
+            this.gameTimer.Enabled = true;
+            this.gameTimer.Interval = 20;
+            this.gameTimer.Tick += new System.EventHandler(this.MainEvent);
+            // 
             // Player
             // 
             this.Player.BackColor = System.Drawing.Color.Transparent;
+            this.Player.Image = global::MyProject.Properties.Resources.up;
             this.Player.Location = new System.Drawing.Point(433, 459);
             this.Player.Name = "Player";
             this.Player.Size = new System.Drawing.Size(71, 100);
@@ -87,12 +94,6 @@
             this.Player.TabIndex = 4;
             this.Player.TabStop = false;
             this.Player.Click += new System.EventHandler(this.Player_Click);
-            // 
-            // gameTimer
-            // 
-            this.gameTimer.Enabled = true;
-            this.gameTimer.Interval = 20;
-            this.gameTimer.Tick += new System.EventHandler(this.MainEvent);
             // 
             // Form1
             // 

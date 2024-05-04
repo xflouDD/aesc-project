@@ -32,19 +32,14 @@ namespace MyProject
 
         int score = 0;
 
+        bool isKitDropped = false;
+
         List<PictureBox> zombies = new List<PictureBox>();
         public Form1()
         {
+            
             InitializeComponent();
             Restart();
-            foreach (Control control in Controls)
-            {
-                if (control is PictureBox pictureBox)
-                {
-                    pictureBox.BackColor = Color.Transparent;
-                    pictureBox.BackgroundImage = null;
-                }
-            }
         }
 
         private void txtHealth_Click(object sender, EventArgs e)
@@ -61,9 +56,16 @@ namespace MyProject
             else
             {
                 gameover = true;
+
                 Player.Image = Properties.Resources.dead;
                 gameTimer.Stop();
 
+            }
+
+            if(PlayerHealth < 50 && gameover == false && isKitDropped == false)
+            {
+                dropNewKit();
+                isKitDropped = true;
             }
             speed = getPlayerSpeed();
             txtBullet.Text = "Bullets: " + bullets;
@@ -86,15 +88,30 @@ namespace MyProject
                 Player.Top += speed;
             }
 
+            List<Control> toRemove = new List<Control>();
+            
             foreach (Control x in this.Controls)
             {
                 if (x is PictureBox && (string)x.Tag == "newbull")
                 {
                     if (Player.Bounds.IntersectsWith(x.Bounds))
                     {
+                        toRemove.Add(x);
                         this.Controls.Remove(x);
                         ((PictureBox)x).Dispose();
                         bullets += random.Next(3, 8);
+                    }
+                }
+
+                if (x is PictureBox && (string)x.Tag == "kit")
+                {
+                    if (Player.Bounds.IntersectsWith(x.Bounds))
+                    {
+                        toRemove.Add(x);
+                        this.Controls.Remove(x);
+                        ((PictureBox)x).Dispose();
+                        PlayerHealth += random.Next(20, maxHp - PlayerHealth);
+                        isKitDropped = false;
                     }
                 }
 
@@ -155,6 +172,10 @@ namespace MyProject
                 goleft = true;
                 direct = "left";
                 Player.Image = Properties.Resources.left;
+                SetStyle(ControlStyles.SupportsTransparentBackColor |
+                   ControlStyles.AllPaintingInWmPaint |
+                   ControlStyles.UserPaint, true);
+                Player.BackColor = Color.Transparent;
 
             }
 
@@ -163,7 +184,10 @@ namespace MyProject
                 goright = true;
                 direct = "right";
                 Player.Image = Properties.Resources.right;
-
+                SetStyle(ControlStyles.SupportsTransparentBackColor |
+                   ControlStyles.AllPaintingInWmPaint |
+                   ControlStyles.UserPaint, true);
+                Player.BackColor = Color.Transparent;
             }
 
             if (e.KeyCode == Keys.Up)
@@ -171,7 +195,10 @@ namespace MyProject
                 goup = true;
                 direct = "up";
                 Player.Image = Properties.Resources.up;
-
+                SetStyle(ControlStyles.SupportsTransparentBackColor |
+                  ControlStyles.AllPaintingInWmPaint |
+                  ControlStyles.UserPaint, true);
+                Player.BackColor = Color.Transparent;
             }
 
             if (e.KeyCode == Keys.Down)
@@ -179,6 +206,10 @@ namespace MyProject
                 godown = true;
                 direct = "down";
                 Player.Image = Properties.Resources.down;
+                SetStyle(ControlStyles.SupportsTransparentBackColor |
+                  ControlStyles.AllPaintingInWmPaint |
+                  ControlStyles.UserPaint, true);
+                Player.BackColor = Color.Transparent;
             }
         }
 
@@ -217,6 +248,11 @@ namespace MyProject
             if (e.KeyCode == Keys.Enter && gameover == true)
             {
                 Restart();
+            }
+
+            if(e.KeyCode == Keys.Escape && gameover == true)
+            {
+                this.Close();
             }
 
         }
@@ -287,7 +323,9 @@ namespace MyProject
 
             zombie.SizeMode = PictureBoxSizeMode.AutoSize;
             zombie.BackColor = Color.Transparent;
+            
             zombie.BackgroundImage = null;
+
             zombies.Add(zombie);
             this.Controls.Add(zombie);
             Player.BringToFront();
@@ -327,10 +365,49 @@ namespace MyProject
             Player.BringToFront();
         }
 
+        private void dropNewKit()
+        {
+            PictureBox kit = new PictureBox();
+            kit.Image = Properties.Resources.kitmn1;
+            while (true)
+            {
+                bool good = true;
+
+                int tempX = random.Next(10, this.ClientSize.Width - kit.Width);
+                int tempY = random.Next(50, this.ClientSize.Height - kit.Height);
+
+
+                if (Math.Abs(tempX - Player.Left) < minDistX)
+                {
+                    good = false;
+                }
+
+                if (Math.Abs(tempY - Player.Top) < minDistY)
+                {
+                    good = false;
+                }
+
+                if (good)
+                {
+                    kit.Left = tempX;
+                    kit.Top = tempY;
+                    break;
+                }
+            }
+
+            kit.Tag = "kit";
+            this.Controls.Add(kit);
+            kit.BringToFront();
+            Player.BringToFront();
+        }
+
         private void Restart()
         {
             Player.BackgroundImage = null;
             Player.Image = Properties.Resources.up;
+            direct = "up";
+            Player.BackColor = Color.Transparent;
+
 
             foreach (PictureBox x in zombies)
             {
@@ -338,9 +415,30 @@ namespace MyProject
             }
 
             zombies.Clear();
-            makeZombies();
 
-            // rofls
+            isKitDropped = false;
+
+            List<Control> toRemove = new List<Control>();
+            foreach (Control x in this.Controls)
+            {
+                if (x is PictureBox && (string)x.Tag == "kit")
+                {
+                    toRemove.Add(x);
+                }
+                if (x is PictureBox && (string)x.Tag == "newbull")
+                {
+                    toRemove.Add(x);
+                }
+            }
+
+            foreach (Control x in toRemove)
+            {
+                this.Controls.Remove(x);
+                ((PictureBox)x).Dispose();
+            }
+
+            zombies.Clear();
+            makeZombies();
             goup = false;
             goleft = false;
             godown = false;
