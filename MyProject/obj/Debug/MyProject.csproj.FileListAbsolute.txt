@@ -21,3 +21,4 @@ C:\Users\vinik\Desktop\xfloud project\aesc-project\MyProject\obj\Debug\MyProject
 C:\Users\vinik\Desktop\xfloud project\aesc-project\MyProject\obj\Debug\MyProject.exe
 C:\Users\vinik\Desktop\xfloud project\aesc-project\MyProject\obj\Debug\MyProject.pdb
 C:\Users\Asus\Desktop\MyProject\MyProject\obj\Debug\MyProject.StartScreen.resources
+C:\Users\Asus\Desktop\MyProject\MyProject\obj\Debug\MyProject.ControlsScreen.resources

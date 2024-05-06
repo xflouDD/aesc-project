@@ -42,11 +42,6 @@ namespace MyProject
             Restart();
         }
 
-        private void txtHealth_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void MainEvent(object sender, EventArgs e)
         {
             if (PlayerHealth > 1)
@@ -70,6 +65,7 @@ namespace MyProject
             speed = getPlayerSpeed();
             txtBullet.Text = "Bullets: " + bullets;
             txtKill.Text = "Kills: " + score;
+            Keys adown = Keys.Down;
             if (goleft == true && Player.Left > 0)
             {
                 Player.Left -= speed;
@@ -172,9 +168,6 @@ namespace MyProject
                 goleft = true;
                 direct = "left";
                 Player.Image = Properties.Resources.left;
-                SetStyle(ControlStyles.SupportsTransparentBackColor |
-                   ControlStyles.AllPaintingInWmPaint |
-                   ControlStyles.UserPaint, true);
                 Player.BackColor = Color.Transparent;
 
             }
@@ -184,9 +177,6 @@ namespace MyProject
                 goright = true;
                 direct = "right";
                 Player.Image = Properties.Resources.right;
-                SetStyle(ControlStyles.SupportsTransparentBackColor |
-                   ControlStyles.AllPaintingInWmPaint |
-                   ControlStyles.UserPaint, true);
                 Player.BackColor = Color.Transparent;
             }
 
@@ -195,9 +185,6 @@ namespace MyProject
                 goup = true;
                 direct = "up";
                 Player.Image = Properties.Resources.up;
-                SetStyle(ControlStyles.SupportsTransparentBackColor |
-                  ControlStyles.AllPaintingInWmPaint |
-                  ControlStyles.UserPaint, true);
                 Player.BackColor = Color.Transparent;
             }
 
@@ -206,9 +193,6 @@ namespace MyProject
                 godown = true;
                 direct = "down";
                 Player.Image = Properties.Resources.down;
-                SetStyle(ControlStyles.SupportsTransparentBackColor |
-                  ControlStyles.AllPaintingInWmPaint |
-                  ControlStyles.UserPaint, true);
                 Player.BackColor = Color.Transparent;
             }
         }
@@ -260,11 +244,6 @@ namespace MyProject
         private int getPlayerSpeed()
         {
             return minPlayerSpeed + PlayerHealth * (maxPlayerSpeed - minPlayerSpeed) / maxHp;
-        }
-
-        private void Player_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -408,12 +387,6 @@ namespace MyProject
             direct = "up";
             Player.BackColor = Color.Transparent;
 
-
-            foreach (PictureBox x in zombies)
-            {
-                this.Controls.Remove(x);
-            }
-
             zombies.Clear();
 
             isKitDropped = false;
@@ -429,6 +402,10 @@ namespace MyProject
                 {
                     toRemove.Add(x);
                 }
+                if(x is PictureBox && (string) x.Tag == "zombie")
+                {
+                    toRemove.Add(x);
+                }
             }
 
             foreach (Control x in toRemove)
@@ -438,7 +415,6 @@ namespace MyProject
             }
 
             zombies.Clear();
-            makeZombies();
             goup = false;
             goleft = false;
             godown = false;
@@ -447,6 +423,7 @@ namespace MyProject
             PlayerHealth = 100;
             bullets = 10;
             score = 0;
+            makeZombies();
             gameTimer.Start();
         }
     }

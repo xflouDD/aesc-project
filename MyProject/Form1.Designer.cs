@@ -67,7 +67,6 @@
             this.txtHealth.Size = new System.Drawing.Size(101, 23);
             this.txtHealth.TabIndex = 2;
             this.txtHealth.Text = "Health:";
-            this.txtHealth.Click += new System.EventHandler(this.txtHealth_Click);
             // 
             // HealthBar
             // 
@@ -93,7 +92,6 @@
             this.Player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.Player.TabIndex = 4;
             this.Player.TabStop = false;
-            this.Player.Click += new System.EventHandler(this.Player_Click);
             // 
             // Form1
             // 

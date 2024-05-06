@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bullet.cs" />
+    <Compile Include="ControlsScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlsScreen.Designer.cs">
+      <DependentUpon>ControlsScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ControlsScreen.resx">
+      <DependentUpon>ControlsScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -121,6 +130,12 @@
     <None Include="Resources\zup.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\keys_enter.png" />
+    <None Include="Resources\keys_space.png" />
+    <None Include="Resources\keys_right.png" />
+    <None Include="Resources\keys_left.png" />
+    <None Include="Resources\keys_down.png" />
+    <None Include="Resources\keys_up.png" />
     <None Include="Resources\girl4.gif" />
     <None Include="Resources\girl3.gif" />
     <None Include="Resources\girl2.gif" />
